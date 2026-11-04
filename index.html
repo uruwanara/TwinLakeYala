@@ -55,8 +55,10 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between}
 .bird path{animation:flap .5s ease-in-out infinite alternate;transform-origin:center}
 .hero-content{position:relative;z-index:5;padding:0 5%}
 .eyebrow{display:inline-block;letter-spacing:.35em;text-transform:uppercase;font-size:.8rem;padding:8px 20px;border:1px solid rgba(255,255,255,.5);border-radius:50px;background:var(--glass);backdrop-filter:blur(6px);animation:rise 1s .2s both}
-.hero h1{font-size:clamp(3rem,9vw,7rem);font-weight:800;margin:22px 0 14px;text-shadow:0 6px 30px rgba(0,0,0,.5)}
+.hero h1{font-size:clamp(2.4rem,11vw,7rem);font-weight:800;margin:22px 0 14px;text-shadow:0 6px 30px rgba(0,0,0,.5)}
 .hero h1 span{display:inline-block;animation:rise .9s both}
+.hero h1 .w{display:inline-block;white-space:nowrap;font-weight:inherit}
+.hero h1 em{display:inline-block}
 .hero h1 em{font-style:italic;color:var(--sun)}
 .hero p.lead{font-size:clamp(1rem,2vw,1.35rem);max-width:640px;margin:0 auto 34px;font-weight:400;text-shadow:0 2px 14px rgba(0,0,0,.85);animation:rise 1s 1s both}
 .cta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:rise 1s 1.2s both}
@@ -156,7 +158,9 @@ section{padding:110px 0;position:relative}
 
 /* contact */
 .contact{background:linear-gradient(135deg,#0b6f80,#0f2a1d);color:#fff;overflow:hidden}
-.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;position:relative;z-index:2}
+.contact .wrap{position:relative;z-index:2;max-width:720px;text-align:center}
+.contact .info{display:inline-block;text-align:left}
+.contact .cta{margin-top:10px}
 .contact .title{color:#fff}.contact .tag{color:var(--lime)}
 .ripples{position:absolute;right:-120px;top:50%;width:520px;height:520px;margin-top:-260px}
 .ripples i{position:absolute;inset:0;border:2px solid rgba(255,255,255,.35);border-radius:50%;animation:ripple 6s linear infinite}
@@ -164,14 +168,6 @@ section{padding:110px 0;position:relative}
 .info{list-style:none;margin:26px 0 34px}
 .info li{display:flex;gap:14px;align-items:center;margin:14px 0;font-size:1.08rem}
 .info li b{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:var(--glass);flex:none}
-.form{background:rgba(255,255,255,.1);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.25);border-radius:26px;padding:34px}
-.form h3{font-size:1.6rem;margin-bottom:18px}
-.form label{display:block;font-size:.82rem;margin:12px 0 4px;opacity:.85}
-.form input,.form select,.form textarea{width:100%;padding:13px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.14);color:#fff;font:inherit}
-.form select option{color:#000}
-.form input::placeholder,.form textarea::placeholder{color:rgba(255,255,255,.55)}
-.form .btn{width:100%;margin-top:20px}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 
 footer{background:#081810;color:#fff;text-align:center;padding:34px 0;font-size:.88rem;opacity:.95}
 footer small{opacity:.6}footer .credits{display:block;max-width:900px;margin:12px auto 0;font-size:.72rem;line-height:1.7}footer .credits a{text-decoration:underline}
@@ -198,7 +194,7 @@ footer small{opacity:.6}footer .credits{display:block;max-width:900px;margin:12p
 
 /* ---------- RESPONSIVE ---------- */
 @media(max-width:900px){
-  .intro,.contact .wrap{grid-template-columns:1fr}
+  .intro{grid-template-columns:1fr}
   .collage{height:420px}
   .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}
   .g1,.g6{grid-column:span 2}
@@ -340,21 +336,8 @@ footer small{opacity:.6}footer .credits{display:block;max-width:900px;margin:12p
         <li><b>💬</b><a href="https://wa.me/94777425525" target="_blank" rel="noopener">Chat on WhatsApp</a></li>
         <li><b>📍</b>Yala, Sri Lanka</li>
       </ul>
+      <div class="cta"><a href="tel:+94777425525" class="btn pulse">Call Us</a><a href="https://wa.me/94777425525" target="_blank" rel="noopener" class="btn ghost">WhatsApp</a></div>
     </div>
-    <form class="form reveal right" id="form">
-      <h3>Send an enquiry</h3>
-      <label for="name">Your name</label>
-      <input id="name" required placeholder="Jane Smith">
-      <div class="row2">
-        <div><label for="date">Arrival date</label><input id="date" type="date"></div>
-        <div><label for="guests">Guests</label><input id="guests" type="number" min="1" value="2"></div>
-      </div>
-      <label for="interest">I'm interested in</label>
-      <select id="interest"><option>Stay at Twin Lake</option><option>Jeep safari</option><option>Birdwatching</option><option>Full package</option></select>
-      <label for="msg">Message</label>
-      <textarea id="msg" rows="3" placeholder="Anything we should know?"></textarea>
-      <button class="btn pulse" type="submit">Send via WhatsApp</button>
-    </form>
   </div>
 </section>
 
@@ -382,8 +365,8 @@ menu.querySelectorAll('a').forEach(a => a.onclick = () => menu.classList.remove(
 const t = document.getElementById('heroTitle');
 const em = t.querySelector('em').textContent;
 let i = 0;
-const wrapLetters = s => [...s].map(c => c === ' ' ? ' ' : `<span style="animation-delay:${(.35 + (i++) * .06).toFixed(2)}s">${c}</span>`).join('');
-t.innerHTML = wrapLetters('Twin Lake ') + '<em>' + wrapLetters(em) + '</em>';
+const wrapLetters = s => s.trim().split(' ').map(w => '<b class="w">' + [...w].map(c => `<span style="animation-delay:${(.35 + (i++) * .06).toFixed(2)}s">${c}</span>`).join('') + '</b>').join(' ');
+t.innerHTML = wrapLetters('Twin Lake') + ' <em>' + wrapLetters(em) + '</em>';
 
 // reveal on scroll
 const io = new IntersectionObserver(es => es.forEach(e => {
@@ -444,14 +427,6 @@ document.querySelectorAll('.g').forEach(g => g.onclick = () => {
 });
 lb.onclick = () => lb.classList.remove('open');
 addEventListener('keydown', e => { if (e.key === 'Escape') lb.classList.remove('open'); });
-
-// enquiry form -> WhatsApp
-document.getElementById('form').onsubmit = e => {
-  e.preventDefault();
-  const v = id => document.getElementById(id).value;
-  const text = `Hello Twin Lake Yala! I'm ${v('name')}. Arrival: ${v('date') || 'flexible'}, guests: ${v('guests')}. Interested in: ${v('interest')}. ${v('msg')}`;
-  window.open('https://wa.me/94777425525?text=' + encodeURIComponent(text), '_blank');
-};
 </script>
 </body>
 </html>
